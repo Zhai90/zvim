@@ -5,9 +5,13 @@ return {
 		dependencies = {
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-path",
+			"hrsh7th/cmp-nvim-lua",
 			"L3MON4D3/LuaSnip",
-			"saadparwaiz1/cmp_luasnip",
+			"saadparwaiz8/cmp_luasnip",
 			"rafamadriz/friendly-snippets",
+			"SergioRibera/cmp-dotenv",
+			"hrsh7th/cmp-nvim-lsp",
+			"onsails/lspkind.nvim",
 		},
 		config = function()
 			local cmp = require("cmp")
@@ -15,6 +19,25 @@ return {
 			require("luasnip.loaders.from_vscode").lazy_load()
 
 			cmp.setup({
+				window = {
+					completion = {
+						winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
+						col_offset = -3,
+						side_padding = 0,
+					},
+				},
+				formatting = {
+					fields = { "kind", "abbr", "menu" },
+					format = function(entry, vim_item)
+						local kind =
+							require("lspkind").cmp_format({ mode = "symbol_text", maxwidth = 50 })(entry, vim_item)
+						local strings = vim.split(kind.kind, "%s", { trimempty = true })
+						kind.kind = " " .. (strings[1] or "") .. " "
+						kind.menu = "    (" .. (strings[2] or "") .. ")"
+
+						return kind
+					end,
+				},
 				completion = {
 					completeopt = "menu,menuone,preview,noselect",
 				},
@@ -33,9 +56,12 @@ return {
 					["<CR>"] = cmp.mapping.confirm({ select = true }),
 				}),
 				sources = cmp.config.sources({
-					{ name = "luasnip" },
-					{ name = "buffer" },
-					{ name = "path" },
+					{ name = "luasnip", max_item_count = 10 },
+					{ name = "nvim_lua", max_item_count = 10 },
+					{ name = "dotenv", max_item_count = 10 },
+					{ name = "buffer", max_item_count = 10 },
+					{ name = "path", max_item_count = 10 },
+					{ name = "nvim_lsp", max_item_count = 10 },
 				}),
 			})
 		end,

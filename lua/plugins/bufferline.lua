@@ -37,7 +37,7 @@ return {
 		config = function()
 			require("bufferline").setup({
 				options = {
-					separator_style = "thin",
+					separator_style = "slant",
 				},
 			})
 
