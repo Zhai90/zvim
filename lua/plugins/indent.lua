@@ -1,17 +1,19 @@
 return {
 	{
 		"lukas-reineke/indent-blankline.nvim",
+		event = "BufEnter",
 		opts = {
 			indent = {
 				char = "│",
 				tab_char = "│",
 			},
-			scope = { enabled = false },
+			scope = { show_start = false, show_end = false },
 			exclude = {
 				filetypes = {
 					"help",
 					"alpha",
 					"dashboard",
+					"neo-tree",
 					"Trouble",
 					"trouble",
 					"lazy",
@@ -26,9 +28,15 @@ return {
 	},
 	{
 		"echasnovski/mini.indentscope",
+		version = false, -- wait till new 0.7.0 release to put it back on semver
+		event = "BufEnter",
 		opts = {
-			symbol = "│",
+			-- symbol = "▏",
+			symbol = "╎",
 			options = { try_as_border = true },
+			draw = {
+				delay = 50,
+			},
 		},
 		init = function()
 			vim.api.nvim_create_autocmd("FileType", {

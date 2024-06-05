@@ -102,6 +102,8 @@ return {
 				vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 			end
 
+			require("java").setup()
+
 			mason_lspconfig.setup_handlers({
 				function(server_name)
 					lspconfig[server_name].setup({
@@ -154,6 +156,7 @@ return {
 										[vim.fn.stdpath("config") .. "/lua"] = true,
 									},
 								},
+								hint = { enable = true },
 							},
 						},
 					})
@@ -161,10 +164,10 @@ return {
 				["jdtls"] = function()
 					lspconfig["jdtls"].setup({
 						capabilities = capabilities,
-						handlers = {
-							["language/status"] = function(_, result) end,
-							["$/progress"] = function(_, result, ctx) end,
-						},
+						-- handlers = {
+						-- 	["language/status"] = function(_, result) end,
+						-- 	["$/progress"] = function(_, result, ctx) end,
+						-- },
 					})
 				end,
 			})
@@ -190,6 +193,7 @@ return {
 					markdown = { "prettier" },
 					lua = { "stylua" },
 					python = { "isort", "black" },
+					java = { "prettier" },
 				},
 				format_on_save = {
 					lsp_fallback = true,

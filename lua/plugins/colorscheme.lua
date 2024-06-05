@@ -1,13 +1,9 @@
 return {
 	{
-		"ribru17/bamboo.nvim",
-		lazy = false,
-		priority = 1000,
+		"rebelot/kanagawa.nvim",
 		config = function()
-			require("bamboo").setup({
-				style = "multiplex",
-			})
-			require("bamboo").load()
+			require("kanagawa").setup({})
+			vim.cmd.colorscheme("kanagawa-dragon")
 		end,
 	},
 }

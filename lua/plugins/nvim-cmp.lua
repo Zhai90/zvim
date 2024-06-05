@@ -7,7 +7,7 @@ return {
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-nvim-lua",
 			"L3MON4D3/LuaSnip",
-			"saadparwaiz8/cmp_luasnip",
+			"saadparwaiz1/cmp_luasnip",
 			"rafamadriz/friendly-snippets",
 			"SergioRibera/cmp-dotenv",
 			"hrsh7th/cmp-nvim-lsp",
@@ -56,12 +56,12 @@ return {
 					["<CR>"] = cmp.mapping.confirm({ select = true }),
 				}),
 				sources = cmp.config.sources({
+					{ name = "nvim_lsp", max_item_count = 10 },
 					{ name = "luasnip", max_item_count = 10 },
 					{ name = "nvim_lua", max_item_count = 10 },
 					{ name = "dotenv", max_item_count = 10 },
 					{ name = "buffer", max_item_count = 10 },
 					{ name = "path", max_item_count = 10 },
-					{ name = "nvim_lsp", max_item_count = 10 },
 				}),
 			})
 		end,
