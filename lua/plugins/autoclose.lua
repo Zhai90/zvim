@@ -1,12 +1,11 @@
 return {
 	{
-		"altermo/ultimate-autopair.nvim",
-		event = { "InsertEnter", "CmdlineEnter" },
-		branch = "v0.6",
-		opts = {},
+		"cohama/lexima.vim",
+		event = { "InsertEnter" },
 	},
 	{
 		"windwp/nvim-ts-autotag",
 		opts = {},
+		ft = { "html", "ts", "js", "tsx", "jsx", "xml" },
 	},
 }

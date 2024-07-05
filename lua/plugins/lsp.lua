@@ -29,7 +29,9 @@ return {
 					"rust_analyzer",
 					"emmet_ls",
 					"pyright",
-					"jdtls",
+					"kotlin_language_server",
+					"ktfmt",
+					"ktlint",
 				},
 				automatic_installation = true,
 			})
@@ -102,8 +104,6 @@ return {
 				vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 			end
 
-			require("java").setup()
-
 			mason_lspconfig.setup_handlers({
 				function(server_name)
 					lspconfig[server_name].setup({
@@ -138,6 +138,11 @@ return {
 						},
 					})
 				end,
+				["kotlin_language_server"] = function()
+					lspconfig["kotlin_language_server"].setup({
+						capabilities = capabilities,
+					})
+				end,
 				["lua_ls"] = function()
 					-- configure lua server (with special settings)
 					lspconfig["lua_ls"].setup({
@@ -161,15 +166,15 @@ return {
 						},
 					})
 				end,
-				["jdtls"] = function()
-					lspconfig["jdtls"].setup({
-						capabilities = capabilities,
-						-- handlers = {
-						-- 	["language/status"] = function(_, result) end,
-						-- 	["$/progress"] = function(_, result, ctx) end,
-						-- },
-					})
-				end,
+				-- ["jdtls"] = function()
+				-- 	lspconfig["jdtls"].setup({
+				-- 		capabilities = capabilities,
+				-- 		-- handlers = {
+				-- 		-- 	["language/status"] = function(_, result) end,
+				-- 		-- 	["$/progress"] = function(_, result, ctx) end,
+				-- 		-- },
+				-- 	})
+				-- end,
 			})
 		end,
 	},
@@ -194,6 +199,7 @@ return {
 					lua = { "stylua" },
 					python = { "isort", "black" },
 					java = { "prettier" },
+					kotlin = { "prettier" },
 				},
 				format_on_save = {
 					lsp_fallback = true,

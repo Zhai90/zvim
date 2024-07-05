@@ -9,7 +9,6 @@ return {
 			"L3MON4D3/LuaSnip",
 			"saadparwaiz1/cmp_luasnip",
 			"rafamadriz/friendly-snippets",
-			"SergioRibera/cmp-dotenv",
 			"hrsh7th/cmp-nvim-lsp",
 			"onsails/lspkind.nvim",
 		},
@@ -21,10 +20,18 @@ return {
 			cmp.setup({
 				window = {
 					completion = {
-						winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
+						border = "rounded",
+						winhighlight = "Normal:CmpNormal,FloatBorder:CmpNormal,Search:None",
 						col_offset = -3,
 						side_padding = 0,
 					},
+					documentation = {
+						winhighlight = "Normal:CmpDocNormal,FloatBorder:CmpNormal",
+						border = "rounded",
+					},
+				},
+				completion = {
+					completeopt = "menu,menuone,preview,noselect",
 				},
 				formatting = {
 					fields = { "kind", "abbr", "menu" },
@@ -37,9 +44,6 @@ return {
 
 						return kind
 					end,
-				},
-				completion = {
-					completeopt = "menu,menuone,preview,noselect",
 				},
 				snippet = {
 					expand = function(args)
@@ -56,12 +60,11 @@ return {
 					["<CR>"] = cmp.mapping.confirm({ select = true }),
 				}),
 				sources = cmp.config.sources({
-					{ name = "nvim_lsp", max_item_count = 10 },
-					{ name = "luasnip", max_item_count = 10 },
-					{ name = "nvim_lua", max_item_count = 10 },
-					{ name = "dotenv", max_item_count = 10 },
-					{ name = "buffer", max_item_count = 10 },
-					{ name = "path", max_item_count = 10 },
+					{ name = "nvim_lsp" },
+					{ name = "luasnip" },
+					{ name = "nvim_lua" },
+					{ name = "buffer" },
+					{ name = "path" },
 				}),
 			})
 		end,
