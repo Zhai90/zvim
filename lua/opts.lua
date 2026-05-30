@@ -37,4 +37,4 @@ vim.keymap.set("n", "<c-l>", "<Cmd>wincmd l<CR>")
 vim.keymap.set("n", ";", ":")
 
 vim.keymap.set("n", "<leader>h", ":nohlsearch<CR>")
-vim.lsp.inlay_hint.enable()
+vim.lsp.inlay_hint.enable(true)
